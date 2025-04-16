@@ -1,37 +1,7 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Risk Dashboard</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body class="container mt-5">
-    <h2 class="mb-4">Risk Status Overview</h2>
-
-    <canvas id="riskChart" width="400" height="400"></canvas>
-    <script>
-        const ctx = document.getElementById('riskChart').getContext('2d');
-        const riskChart = new Chart(ctx, {
-            type: 'pie',
-            data: {
-                labels: {{ labels|tojson }},
-                datasets: [{
-                    label: 'Risk Count',
-                    data: {{ counts|tojson }},
-                    backgroundColor: [
-                        'rgba(54, 162, 235, 0.7)',
-                        'rgba(255, 206, 86, 0.7)',
-                        'rgba(75, 192, 192, 0.7)',
-                        'rgba(255, 99, 132, 0.7)',
-                        'rgba(153, 102, 255, 0.7)'
-                    ],
-                    borderWidth: 1
-                }]
-            }
-        });
-    </script>
-
-    <br>
-    <a href="/risk-register" class="btn btn-secondary">← Back to Risk Register</a>
-</body>
-</html>
+{% extends 'layout.html' %}
+{% block content %}
+<h2>Risk Dashboard</h2>
+<p>Summary of risks (static visualization):</p>
+<img src="https://quickchart.io/chart?c={type:'bar',data:{labels:['Low','Medium','High'],datasets:[{label:'Impact',data:[1,2,3]}]}}" alt="Impact Chart" class="img-fluid" />
+<img src="https://quickchart.io/chart?c={type:'pie',data:{labels:['Low','Medium','High'],datasets:[{label:'Likelihood',data:[2,2,2]}]}}" alt="Likelihood Chart" class="img-fluid" />
+{% endblock %}

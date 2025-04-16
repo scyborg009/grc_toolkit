@@ -1,36 +1,48 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Risk Register</title>
-</head>
-<body>
-    <h1>Risk Register</h1>
+{% extends 'layout.html' %}
+{% block content %}
+<h2>Risk Register</h2>
+<form method="POST" class="mb-4">
+  <div class="mb-3">
+    <label class="form-label">Risk Name</label>
+    <input type="text" class="form-control" name="risk_name" required>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Impact</label>
+    <select class="form-control" name="impact">
+      <option>Low</option>
+      <option>Medium</option>
+      <option>High</option>
+    </select>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Likelihood</label>
+    <select class="form-control" name="likelihood">
+      <option>Low</option>
+      <option>Medium</option>
+      <option>High</option>
+    </select>
+  </div>
+  <button type="submit" class="btn btn-primary">Add Risk</button>
+</form>
 
-    <form method="POST">
-        <label>Risk ID:</label><br>
-        <input type="text" name="id" required><br><br>
-
-        <label>Description:</label><br>
-        <input type="text" name="description" required><br><br>
-
-        <label>Impact:</label><br>
-        <input type="text" name="impact" required><br><br>
-
-        <label>Likelihood:</label><br>
-        <input type="text" name="likelihood" required><br><br>
-
-        <button type="submit">Add Risk</button>
-    </form>
-
-    <h2>Existing Risks</h2>
-    <ul>
-        {% for risk in risks %}
-            <li><strong>{{ risk.id }}</strong> - {{ risk.description }} (Impact: {{ risk.impact }}, Likelihood: {{ risk.likelihood }})</li>
-        {% else %}
-            <li>No risks recorded yet.</li>
-        {% endfor %}
-    </ul>
-
-    <br><a href="/">Back to Home</a>
-</body>
-</html>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Impact</th>
+      <th>Likelihood</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for risk in risks %}
+    <tr>
+      <td>{{ risk.id }}</td>
+      <td>{{ risk.name }}</td>
+      <td>{{ risk.impact }}</td>
+      <td>{{ risk.likelihood }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
